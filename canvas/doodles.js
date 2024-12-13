@@ -16,9 +16,9 @@ function setup() {
 
 function draw() {
   background(random(backgroundColors));
-  drawDoodleGrid(random(1, 20), random(10, 12));
+  drawDoodleGrid(random(1, width), random(0, 20));
   noLoop();
-  granulate(15);
+  granulate(10);
 }
 
 function windowResized() {
@@ -40,7 +40,7 @@ function drawLineDoodle(cornerX, cornerY, limitX, limitY) {
   for (let i = 0; i < numberOfLines; i++) {
     const endX = random(cornerX, limitX);
     const endY = random(cornerY, limitY);
-    strokeWeight(random(0.1, 2));
+    strokeWeight(random(1, 4));
     stroke(random(hexColors));
     line(startX, startY, endX, endY);
     startX = endX;
@@ -48,8 +48,13 @@ function drawLineDoodle(cornerX, cornerY, limitX, limitY) {
   }
 }
 
-function mousePressed() {
-  draw();
+function keyPressed() {
+  if (key === 's') {
+    saveCanvas(canvas, 'doodle', 'png');
+  }
+  if (key === 'r') {
+    draw();
+  }
 }
 
 /* Gorilla Grain ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
